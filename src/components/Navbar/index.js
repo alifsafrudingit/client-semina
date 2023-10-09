@@ -10,8 +10,9 @@ export default function SNavbar() {
       <Container>
         <Navbar.Brand href="#home">Dashboard</Navbar.Brand>
         <Nav className="me-auto">
+          <NavLink action={() => navigate("/")}>Home</NavLink>
           <NavLink action={() => navigate("/categories")}>Categories</NavLink>
-          <NavLink action={() => navigate("/speakers")}>Speakers</NavLink>
+          <NavLink action={() => navigate("/talents")}>Talents</NavLink>
           <NavLink action={() => navigate("/events")}>Events</NavLink>
           <NavLink action={() => navigate("/participant")}>Participant</NavLink>
           <NavLink action={() => navigate("/transactions")}>

@@ -5,7 +5,7 @@ import SButton from "../../components/Button";
 import SBreadcrumb from "../../components/Breadcrumb";
 import SNavbar from "../../components/Navbar";
 
-export default function Dashboard() {
+export default function Talents() {
   const token = localStorage.getItem("token");
 
   if (!token) return <Navigate to="/signin" replace={true}></Navigate>;
@@ -15,7 +15,7 @@ export default function Dashboard() {
       <SNavbar />
       <Container className="mt-3">
         <div>
-          <SBreadcrumb />
+          <SBreadcrumb textSecond="Talents" />
         </div>
         <SButton>Tambah</SButton>
         <Table striped bordered hover variant="dark" className="mt-3">
