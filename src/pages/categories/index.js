@@ -1,45 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { Container, Spinner, Table } from "react-bootstrap";
 import SButton from "../../components/Button";
 import SBreadcrumb from "../../components/Breadcrumb";
-import SNavbar from "../../components/Navbar";
-import axios from "axios";
-import { config } from "../../configs";
+import { useNavigate } from "react-router-dom";
+import SAlert from "../../components/Alert";
+import Swal from "sweeaalert2";
+import { deleteData } from "../../utils/fetch";
+import { fetchCategories } from "../../redux/categories/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PageCategories() {
-  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const { categories, notif } = useSelector((state) => state);
 
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
-  const getCategoriesAPI = async () => {
-    setIsLoading(true);
-    try {
-      const res = await axios.get(`${config.api_host_dev}/cms/categories`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setIsLoading(false);
-      setData(res.data.data);
-    } catch (err) {
-      setIsLoading(false);
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    getCategoriesAPI();
-  }, []);
-
-  if (!token) return <Navigate to="/signin" replace={true}></Navigate>;
 
   return (
     <>
-      <SNavbar />
       <Container className="mt-3">
         <div>
           <SBreadcrumb textSecond="Categories" />

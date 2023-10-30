@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import SButton from "../../components/Button";
 import TextInputWithLabel from "../../components/TextInputWithLabel";
 
-export default function CategoriesFormPage({
+export default function CategoriesForm({
   handleSubmit,
   form,
   handleChange,
@@ -19,16 +19,10 @@ export default function CategoriesFormPage({
         value={form.name}
         type="text"
         onChange={handleChange}
-      >
-        <SButton
-          variant="primary"
-          action={handleSubmit}
-          loading={isLoading}
-          disabled={isLoading}
-        >
-          {edit ? "Ubah" : "Simpan"}
-        </SButton>
-      </TextInputWithLabel>
+      />
+      <SButton variant="primary" action={handleSubmit} loading={isLoading}>
+        {edit ? "Ubah" : "Simpan"}
+      </SButton>
     </Form>
   );
 }

@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Container, Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SBreadcrumb from "../../components/Breadcrumb";
 import SAlert from "../../components/Alert";
+import SForm from "./form";
+import { config } from "../../configs";
+import axios from "axios";
+import SNavbar from "../../components/Navbar";
 
 export default function CategoryCreate() {
+  const token = localStorage.getItem("token");
+
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -26,6 +32,12 @@ export default function CategoryCreate() {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
+      axios.post(`${config.api_host_dev}/cms/categories`, form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
       navigate("/categories");
       setIsLoading(false);
     } catch (err) {
@@ -40,19 +52,21 @@ export default function CategoryCreate() {
   };
 
   return (
-    <Container>
-      <SBreadcrumb
-        textSecond={"Categories"}
-        urlSecond={"/categories"}
-        textThird="Create"
-      />
-      {alert.status && <SAlert type={alert.type} message={alert.message} />}
-      <Form
-        form={form}
-        isLoading={isLoading}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
-    </Container>
+    <>
+      <Container>
+        <SBreadcrumb
+          textSecond={"Categories"}
+          urlSecond={"/categories"}
+          textThird="Create"
+        />
+        {alert.status && <SAlert type={alert.type} message={alert.message} />}
+        <SForm
+          form={form}
+          isLoading={isLoading}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+      </Container>
+    </>
   );
 }
