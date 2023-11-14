@@ -6,7 +6,7 @@ import {
 
 import { getData } from "../../utils/fetch";
 import debounce from "debounce-promise";
-import { clearNotif } from "../notif/action";
+import { clearNotif } from "../notif/actions";
 
 let debouncedFetchCategories = debounce(getData, 1000);
 
@@ -38,7 +38,7 @@ export const fetchCategories = () => {
         dispatch(clearNotif());
       }, 3000);
 
-      let res = await debouncedFetchCategories("/v1/cms/categories");
+      let res = await debouncedFetchCategories("/cms/categories");
 
       dispatch(successFetchingCategories({ categories: res.data.data }));
     } catch (error) {

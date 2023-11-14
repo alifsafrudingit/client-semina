@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SBreadcrumb from "../../components/Breadcrumb";
 import SAlert from "../../components/Alert";
 import SForm from "./form";
-import axios from "axios";
+import { getData, putData } from "../../utils/fetch";
+import { useDispatch } from "react-redux";
+import { setNotif } from "../../redux/notif/actions";
 
 export default function CategoryEdit() {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const { categoryId } = useParams();
   const [form, setForm] = useState({
     name: "",
   });
@@ -25,21 +28,31 @@ export default function CategoryEdit() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const fetchOneCategories = async (categoryId) => {
-    const res = await axios.put(`api/v1/categories/${categoryId}`);
+  const fetchOneCategories = async () => {
+    const res = await getData(`/cms/categories/${categoryId}`);
     setForm({ ...form, name: res.data.data.name });
   };
 
   useEffect(() => {
     fetchOneCategories();
-  });
+  }, []);
 
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
+      const res = await putData(`/cms/categories/${categoryId}`, form);
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil ubah kategori ${res.data.data.name}`
+        )
+      );
       navigate("/categories");
       setIsLoading(false);
     } catch (err) {
+      console.log("err");
+      console.log(err);
       setIsLoading(false);
       setAlert({
         ...alert,

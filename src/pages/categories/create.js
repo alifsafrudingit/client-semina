@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 import { Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import SBreadcrumb from "../../components/Breadcrumb";
 import SAlert from "../../components/Alert";
 import SForm from "./form";
-import { config } from "../../configs";
-import axios from "axios";
-import SNavbar from "../../components/Navbar";
+import { postData } from "../../utils/fetch";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setNotif } from "../../redux/notif/actions";
 
 export default function CategoryCreate() {
-  const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     name: "",
@@ -32,15 +31,19 @@ export default function CategoryCreate() {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      axios.post(`${config.api_host_dev}/cms/categories`, form, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      const res = await postData("/cms/categories", form);
+      dispatch(
+        setNotif(
+          true,
+          "success",
+          `berhasil tambah kategori ${res.data.data.name}`
+        )
+      );
       navigate("/categories");
       setIsLoading(false);
     } catch (err) {
+      console.log("err");
+      console.log(err);
       setIsLoading(false);
       setAlert({
         ...alert,
