@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchTalents, setKeyword } from "../../redux/talents/actions";
-import { useNavigate } from "react-router-dom";
-import { accessTalents } from "../../const/access";
-import AlertMessage from "../../components/Alert";
-import Swal from "sweetalert2";
 import { Container } from "react-bootstrap";
-import BreadCrumb from "../../components/Breadcrumb";
+import { useNavigate } from "react-router-dom";
+import SBreadCrumb from "../../components/Breadcrumb";
 import Button from "../../components/Button";
 import Table from "../../components/TableWithAction";
-import SearchInput from "../../components/SearchInput";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchTalents, setKeyword } from "../../redux/talents/actions";
+import SAlert from "../../components/Alert";
+import Swal from "sweetalert2";
 import { deleteData } from "../../utils/fetch";
 import { setNotif } from "../../redux/notif/actions";
+import { accessTalents } from "../../const/access";
+import SearchInput from "../../components/SearchInput";
 
 export default function TalentsPage() {
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ export default function TalentsPage() {
 
   return (
     <Container className="mt-3">
-      <BreadCrumb textSecond={"Talents"} />
+      <SBreadCrumb textSecond={"Talents"} />
       {access.tambah && (
         <div className="mb-3">
           <Button action={() => navigate("/talents/create")}>Tambah</Button>
@@ -85,7 +85,7 @@ export default function TalentsPage() {
         handleChange={(e) => dispatch(setKeyword(e.target.value))}
       />
       {notif.status && (
-        <AlertMessage type={notif.typeNotif} message={notif.message} />
+        <SAlert type={notif.typeNotif} message={notif.message} />
       )}
       <Table
         status={talents.status}

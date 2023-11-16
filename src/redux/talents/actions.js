@@ -32,8 +32,10 @@ export const errorFetchingTalents = () => {
 
 export const fetchTalents = () => {
   return async (dispatch, getState) => {
-    dispatch(startFetchingTalents);
-
+    dispatch(startFetchingTalents());
+    const notif = getState().notif.status;
+    console.log("notif");
+    console.log(notif);
     try {
       setTimeout(() => {
         dispatch(clearNotif());
