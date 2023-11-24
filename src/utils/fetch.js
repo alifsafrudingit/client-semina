@@ -19,7 +19,7 @@ export async function getData(url, params) {
   }
 }
 
-export async function postData(url, payload, formData = false) {
+export async function postData(url, payload, formData) {
   try {
     const { token } = localStorage.getItem("auth")
       ? JSON.parse(localStorage.getItem("auth"))
@@ -36,7 +36,7 @@ export async function postData(url, payload, formData = false) {
   }
 }
 
-export async function putData(url, payload, formData = false) {
+export async function putData(url, payload, formData) {
   try {
     const { token } = localStorage.getItem("auth")
       ? JSON.parse(localStorage.getItem("auth"))

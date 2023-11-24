@@ -10,7 +10,7 @@ import categoriesReducer from "./categories/reducer";
 import notifReducer from "./notif/reducer";
 import authReducer from "./auth/reducer";
 import talentsReducer from "./talents/reducer";
-// import paymentsReducer from "./payments/reducer";
+import paymentsReducer from "./payments/reducer";
 // import listsReducer from "./lists/reducer";
 // import eventsReducer from "./events/reducer";
 // import ordersReducer from "./orders/reducer";
@@ -22,7 +22,7 @@ const rootReducers = combineReducers({
   notif: notifReducer,
   auth: authReducer,
   talents: talentsReducer,
-  // payments: paymentsReducer,
+  payments: paymentsReducer,
   // lists: listsReducer,
   // events: eventsReducer,
   // orders: ordersReducer,

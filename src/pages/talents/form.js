@@ -17,7 +17,7 @@ export default function SpeakersForm({
         placeholder={"Masukkan nama pembicara"}
         label={"Nama"}
         name="name"
-        value={"form.name"}
+        value={form.name}
         type="text"
         onChange={handleChange}
       />
@@ -25,7 +25,7 @@ export default function SpeakersForm({
         placeholder={"Masukkan role"}
         label={"Role"}
         name="role"
-        value={"form.role"}
+        value={form.role}
         type="text"
         onChange={handleChange}
       />
@@ -33,8 +33,8 @@ export default function SpeakersForm({
         placeholder={"Masukkan avatar"}
         label={"Avatar"}
         name="avatar"
-        // value={"form.avatar"}
-        type="text"
+        // value={form.avatar}
+        type="file"
         onChange={handleChange}
       />
       {form.avatar !== "" && (

@@ -10,8 +10,8 @@ import Form from "./form";
 import SBreadcrumb from "../../components/Breadcrumb";
 
 function TalentsCreate() {
-  const navigate = useNavigate;
-  const dispatch = useDispatch;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     name: "",
     role: "",
@@ -31,6 +31,8 @@ function TalentsCreate() {
     let formData = new FormData();
     formData.append("avatar", file);
     const res = await postData("/cms/images", formData, true);
+    console.log("res");
+    console.log(res);
     return res;
   };
 
@@ -41,7 +43,7 @@ function TalentsCreate() {
         e?.target?.files[0]?.type === "image/png" ||
         e?.target?.files[0]?.type === "image/jpeg"
       ) {
-        let size = parseFloat(e.target.files[0].size / 3145728).toFixed(2);
+        var size = parseFloat(e.target.files[0].size / 3145728).toFixed(2);
 
         if (size > 2) {
           setAlert({
@@ -92,6 +94,8 @@ function TalentsCreate() {
     };
 
     const res = await postData("/cms/talents", payload);
+    console.log("res");
+    console.log(res);
 
     if (res.data.data) {
       dispatch(
@@ -109,7 +113,7 @@ function TalentsCreate() {
         ...alert,
         status: true,
         type: "danger",
-        message: res.data.data.msg,
+        message: res.response.data.msg,
       });
     }
   };

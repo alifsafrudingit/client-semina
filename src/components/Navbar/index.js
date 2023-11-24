@@ -45,33 +45,21 @@ export default function SNavbar() {
           <NavLink role={role} roles={accessTalents.lihat} to="/talents">
             Talents
           </NavLink>
-          <NavLink
-            role={role}
-            roles={accessEvents.lihat}
-            action={() => navigate("/events")}
-          >
+          <NavLink role={role} roles={accessEvents.lihat} to="/events">
             Events
           </NavLink>
           <NavLink
             role={role}
             roles={accessParticipant.lihat}
-            action={() => navigate("/participant")}
+            to="/participant"
           >
             Participant
           </NavLink>
-          <NavLink
-            role={role}
-            roles={accessPayments.lihat}
-            action={() => navigate("/payments")}
-          >
+          <NavLink role={role} roles={accessPayments.lihat} to="/payments">
             Payments
           </NavLink>
-          <NavLink
-            role={role}
-            roles={accessOrders.lihat}
-            action={() => navigate("/orders")}
-          >
-            Payments
+          <NavLink role={role} roles={accessOrders.lihat} to="/orders">
+            Orders
           </NavLink>
         </Nav>
         <Nav className="justify-content-end">
