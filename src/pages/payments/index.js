@@ -75,7 +75,7 @@ function PaymentsPage() {
 
   return (
     <Container className="mt-3">
-      <SBreadCrumb textSecound={"Payments"} />
+      <SBreadCrumb textSecond={"Payments"} />
 
       {access.tambah && (
         <Button className={"mb-3"} action={() => navigate("/payments/create")}>

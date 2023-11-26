@@ -11,8 +11,8 @@ import notifReducer from "./notif/reducer";
 import authReducer from "./auth/reducer";
 import talentsReducer from "./talents/reducer";
 import paymentsReducer from "./payments/reducer";
-// import listsReducer from "./lists/reducer";
-// import eventsReducer from "./events/reducer";
+import listsReducer from "./lists/reducer";
+import eventsReducer from "./events/reducer";
 // import ordersReducer from "./orders/reducer";
 
 const composerEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -23,8 +23,8 @@ const rootReducers = combineReducers({
   auth: authReducer,
   talents: talentsReducer,
   payments: paymentsReducer,
-  // lists: listsReducer,
-  // events: eventsReducer,
+  lists: listsReducer,
+  events: eventsReducer,
   // orders: ordersReducer,
 });
 
