@@ -64,6 +64,8 @@ export const fetchListCategories = () => {
   };
 };
 
+// talents 
+
 export const startFetchingListsTalents = () => {
   return {
     type: START_FETCHING_LISTS_TALENTS,
