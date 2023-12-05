@@ -80,6 +80,8 @@ export const setCategory = (category) => {
 };
 
 export const setTalent = (talent) => {
+  console.log('talent')
+  console.log(talent)
   return {
     type: SET_TALENT,
     talent,
