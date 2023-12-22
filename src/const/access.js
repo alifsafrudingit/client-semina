@@ -33,6 +33,20 @@ export const accessPayments = {
   hapus: ["organizer"],
 };
 
+export const accessOrganizers = {
+  lihat: ["owner"],
+  tambah: ["owner"],
+  edit: ["owner"],
+  hapus: ["owner"],
+};
+
+export const accessAdmins = {
+  lihat: ["organizer"],
+  tambah: ["organizer"],
+  edit: ["organizer"],
+  hapus: ["organizer"],
+};
+
 export const accessOrders = {
   lihat: ["organizer", "admin", "owner"],
   tambah: ["organizer", "admin", "owner"],

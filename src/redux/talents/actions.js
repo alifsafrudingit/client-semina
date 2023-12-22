@@ -34,8 +34,6 @@ export const fetchTalents = () => {
   return async (dispatch, getState) => {
     dispatch(startFetchingTalents());
     const notif = getState().notif.status;
-    console.log("notif");
-    console.log(notif);
     try {
       setTimeout(() => {
         dispatch(clearNotif());

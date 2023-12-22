@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import BreadCrumb from "../../components/Breadcrumb";
@@ -21,6 +21,7 @@ import {
   fetchListCategories,
   fetchListTalents,
 } from "../../redux/lists/actions";
+import { accessEvents } from "../../const/access";
 
 function EventPage() {
   const navigate = useNavigate();
@@ -30,7 +31,28 @@ function EventPage() {
   const events = useSelector((state) => state.events);
   const lists = useSelector((state) => state.lists);
 
+  const [access, setAccess] = useState({
+    tambah: false,
+    hapus: false,
+    edit: false,
+  });
+
+  const checkAccess = () => {
+    let { role } = localStorage.getItem("auth")
+      ? JSON.parse(localStorage.getItem("auth"))
+      : {};
+
+    const access = { tambah: false, hapus: false, edit: false };
+    Object.keys(accessEvents).forEach(function (key, index) {
+      if (accessEvents[key].indexOf(role) >= 0) {
+        access[key] = true;
+      }
+    });
+    setAccess(access);
+  };
+
   useEffect(() => {
+    checkAccess();
     dispatch(fetchEvents());
   }, [dispatch, events.keyword, events.category, events.talent]);
 
@@ -163,7 +185,7 @@ function EventPage() {
               size={"sm"}
               action={() => handleChangeStatus(id, status)}
             >
-              Change Status
+              Ubah Status
             </Button>
           );
         }}

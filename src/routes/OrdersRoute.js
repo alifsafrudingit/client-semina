@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 
-import Dashboard from "../pages/dashboard";
+import Orders from "../pages/orders";
 
-export function HomeRoute() {
+export function OrdersRoute() {
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Orders />} />
     </Routes>
   );
 }

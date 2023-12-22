@@ -2,8 +2,8 @@ import {
   START_FETCHING_ORDERS,
   SUCCESS_FETCHING_ORDERS,
   ERROR_FETCHING_ORDERS,
-  SET_DATE,
   SET_PAGE,
+  SET_DATE,
 } from "./constants";
 
 const statuslist = {
@@ -16,12 +16,12 @@ const statuslist = {
 const initialState = {
   data: [],
   page: 1,
-  limit: 1,
+  limit: 2,
   pages: 1,
   date: {
     startDate: new Date(),
     endDate: new Date(),
-    key: 'selection'
+    key: "selection",
   },
   status: statuslist.idle,
 };
@@ -29,31 +29,31 @@ const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case START_FETCHING_ORDERS:
-      return { ...state, status: statuslist.process}
-    
+      return { ...state, status: statuslist.process };
+
     case ERROR_FETCHING_ORDERS:
-      return { ...state, status: statuslist.error}
-  
+      return { ...state, status: statuslist.error };
+
     case SUCCESS_FETCHING_ORDERS:
-      return { 
-        ...state, 
-        status: statuslist.success, 
-        data: action.order, 
-        pages: action.pages
-      }
-    
+      return {
+        ...state,
+        status: statuslist.success,
+        data: action.orders,
+        pages: action.pages,
+      };
+
     case SET_PAGE:
       return {
         ...state,
-        page: action.page
-      }
-    
+        page: action.page,
+      };
+
     case SET_DATE:
       return {
         ...state,
-        date: action.range
-      }
-      
+        date: action.ranges,
+      };
+
     default:
       return state;
   }
