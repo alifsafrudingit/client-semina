@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { postData } from "../../utils/fetch";
 import { setNotif } from "../../redux/notif/actions";
-import SBreadCrumb from "../../components/Breadcrumb";
 import SAlert from "../../components/Alert";
 import Form from "./form";
 import SBreadcrumb from "../../components/Breadcrumb";
@@ -94,10 +93,7 @@ function TalentsCreate() {
     };
 
     const res = await postData("/cms/talents", payload);
-    console.log("res");
-    console.log(res);
-
-    if (res.data.data) {
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,

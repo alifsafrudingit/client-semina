@@ -30,8 +30,8 @@ export default function CategoryCreate() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const res = await postData("/cms/categories", form);
+    const res = await postData("/cms/categories", form);
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -41,35 +41,33 @@ export default function CategoryCreate() {
       );
       navigate("/categories");
       setIsLoading(false);
-    } catch (err) {
-      console.log("err");
-      console.log(err);
+    } else {
+      console.log("res");
+      console.log(res);
       setIsLoading(false);
       setAlert({
         ...alert,
         status: true,
         type: "danger",
-        message: err.response.data.msg,
+        message: res.response.data.msg,
       });
     }
   };
 
   return (
-    <>
-      <Container>
-        <SBreadcrumb
-          textSecond={"Categories"}
-          urlSecond={"/categories"}
-          textThird="Create"
-        />
-        {alert.status && <SAlert type={alert.type} message={alert.message} />}
-        <SForm
-          form={form}
-          isLoading={isLoading}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-        />
-      </Container>
-    </>
+    <Container>
+      <SBreadcrumb
+        textSecond={"Categories"}
+        urlSecond={"/categories"}
+        textThird="Create"
+      />
+      {alert.status && <SAlert type={alert.type} message={alert.message} />}
+      <SForm
+        form={form}
+        isLoading={isLoading}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+    </Container>
   );
 }

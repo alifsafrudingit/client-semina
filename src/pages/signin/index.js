@@ -1,10 +1,7 @@
-import React from "react";
-import { Card, CardBody, CardTitle, Container } from "react-bootstrap";
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { Card, Container } from "react-bootstrap";
 import SAlert from "../../components/Alert";
 import { useNavigate } from "react-router-dom";
-import { config } from "../../configs";
 import SForm from "./form";
 import { postData } from "../../utils/fetch";
 import { useDispatch } from "react-redux";
@@ -34,20 +31,26 @@ function PageSignIn() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const res = await postData(`/cms/auth/signin`, form);
-
-      dispatch(userLogin(res.data.data.token, res.data.data.role));
-      setAlert({
-        status: false,
-      });
+    const res = await postData(`/cms/auth/signin`, form);
+    if (res?.data?.data) {
+      dispatch(
+        userLogin(
+          res.data.data.token,
+          res.data.data.role,
+          res.data.data.email,
+          res.data.data.refreshToken
+        )
+      );
+      // setAlert({
+      //   status: false,
+      // });
       setIsLoading(false);
       navigate("/");
-    } catch (err) {
+    } else {
       setIsLoading(false);
       setAlert({
         status: true,
-        message: err?.response?.data?.msg ?? "Internal Server Error",
+        message: res?.response?.data?.msg ?? "Internal Server Error",
         type: "danger",
       });
     }
@@ -61,15 +64,15 @@ function PageSignIn() {
         {alert.status && <SAlert type="danger" message={alert.message} />}
       </div>
       <Card style={{ width: "50%" }} className="m-auto mt-5">
-        <CardBody>
-          <CardTitle className="text-center">Sign In</CardTitle>
+        <Card.Body>
+          <Card.Title className="text-center">Sign In</Card.Title>
           <SForm
             form={form}
             handleChange={handleChange}
             isLoading={isLoading}
             handleSubmit={handleSubmit}
           />
-        </CardBody>
+        </Card.Body>
       </Card>
     </Container>
   );

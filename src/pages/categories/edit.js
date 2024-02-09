@@ -39,8 +39,8 @@ export default function CategoryEdit() {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    try {
-      const res = await putData(`/cms/categories/${categoryId}`, form);
+    const res = await putData(`/cms/categories/${categoryId}`, form);
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
@@ -50,15 +50,15 @@ export default function CategoryEdit() {
       );
       navigate("/categories");
       setIsLoading(false);
-    } catch (err) {
-      console.log("err");
-      console.log(err);
+    } else {
+      console.log("res");
+      console.log(res);
       setIsLoading(false);
       setAlert({
         ...alert,
         status: true,
         type: "danger",
-        message: err.response.data.msg,
+        message: res.response.data.msg,
       });
     }
   };

@@ -92,7 +92,7 @@ function PaymentsCreate() {
     const res = await postData("/cms/payments", payload);
     console.log("res");
     console.log(res);
-    if (res.data.data) {
+    if (res?.data?.data) {
       dispatch(
         setNotif(
           true,
